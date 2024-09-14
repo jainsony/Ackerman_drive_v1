@@ -1,0 +1,2 @@
+oystick
+pygame.init()

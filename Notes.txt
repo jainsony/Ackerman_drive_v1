@@ -1,0 +1,7 @@
+Bot controller info:
+Crystal is 26MHz
+MAC: ec:fa:bc:c1:e6:ea
+
+Remote controller MAC:
+rystal is 26MHz
+MAC: a4:cf:12:d9:24:de
