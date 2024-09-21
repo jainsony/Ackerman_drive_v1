@@ -32,7 +32,7 @@ void setup() {
   y_axis_view.attach(7);
 
   // Initialize the switch pin as an input with pull-up resistor
-  pinMode(SW_PIN, INPUT); 
+  pinMode(SW_PIN, INPUT_PULLUP); 
 
   // Initialize the potentiometer pins (analog read pin doesn't need pinMode)
   pinMode(VRY_PIN, INPUT); // Digital pin for VRY
@@ -54,7 +54,7 @@ void loop() {
   y_axis_write_value = map(vryValue, 0, 1023, 55, 95);
 
   upper_lid_write_value = map(y_axis_write_value,75, 95, 90, 150);
-
+  // lower_lid_write_value = map(y_axis_write_value,75, 95, 90, 150);
 
   Serial.print("x_axis : ");
   Serial.print(x_axis_write_value);
@@ -80,6 +80,13 @@ void loop() {
   Serial.print(" | Switch: ");
   if (swState == LOW) {
     Serial.println("Pressed");
+    delay(20);
+    left_upper_lid.write(90);
+    left_lower_lid.write(90);
+    right_upper_lid.write(90);
+    right_lower_lid.write(90);
+    delay(200);
+
   } else {
     Serial.println("Not Pressed");
   }
@@ -92,10 +99,27 @@ void loop() {
 
 void all_servo_write()
 {
-  left_upper_lid.write(upper_lid_write_value);
-  left_lower_lid.write(90);
-  right_upper_lid.write(90 - (upper_lid_write_value - 90));
-  right_lower_lid.write(90);
+  if (y_axis_write_value > 75)
+  {
+    left_upper_lid.write(upper_lid_write_value);
+    right_upper_lid.write(90 - (upper_lid_write_value - 90));
+  }
+  else
+  {
+    left_upper_lid.write(90);
+    right_upper_lid.write(90);
+  }
+    if (y_axis_write_value < 75)
+  {
+    left_lower_lid.write(upper_lid_write_value);
+    right_lower_lid.write(90 - (upper_lid_write_value - 90));
+  }
+  else
+  {
+    left_lower_lid.write(90);
+    right_lower_lid.write(90);
+  }
+
   x_axis_view.write(x_axis_write_value);
   y_axis_view.write(y_axis_write_value);
 }
