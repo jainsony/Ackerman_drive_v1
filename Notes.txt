@@ -1,7 +1,13 @@
-Bot controller info:
+Old Reciever info:
 Crystal is 26MHz
-MAC: ec:fa:bc:c1:e6:ea
+---------------------------------MAC: ec:fa:bc:c1:e6:ea  For code {0xEC, 0xFA, 0xBC, 0xC1, 0xE6, 0xEA}; boared wifi damaged, it is not working 
 
-Remote controller MAC:
-rystal is 26MHz
-MAC: a4:cf:12:d9:24:de
+
+Reciever info:
+Crystal is 26MHz
+{0xA4, 0xCF, 0x12, 0xD9, 0x24, 0xDE};
+
+
+Transmitter info:
+Crystal is 26MHz
+{0x3C, 0x61, 0x05, 0xD5, 0xD4, 0xC1};

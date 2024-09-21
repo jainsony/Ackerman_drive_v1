@@ -3,13 +3,21 @@
 #define DATALEN 4   // Expected length of data array
 #define THRESHOLD 5 // Example threshold value
 
+Servo x_axis_servo;
+
 char dataBuffer[32];  // Buffer to hold incoming data
 int dataArray[DATALEN]; // Array to hold parsed integers
 int dataIndex = 0; // Index for dataArray
 bool dataReady = false; // Flag to signal when data is fully received
 
+int x_val;
+int val;
+
 void setup() {
   Serial.begin(115200); // Initialize serial communication at 115200 baudrate
+
+  x_axis_servo.attach(9);
+
   memset(dataArray, 0, sizeof(dataArray)); // Initialize dataArray with zeros
 }
 
@@ -60,12 +68,12 @@ void control() {
   // Debugging: Print the parsed data for verification
   printData();
 
-  // Example control logic: Apply thresholds
-  if (dataArray[0] > THRESHOLD) {
-    // Add control logic here
-    // Example: Control a motor or servo
-    Serial.println("Control logic executed.");
-  }
+  x_val = dataArray[0];
+  val = map(x_val, 0, 1023, 0, 180);
+  x_axis_servo.write(val);
+  Serial.print("Servo response");
+  delay(10); 
+  
 }
 
 void printData() {
